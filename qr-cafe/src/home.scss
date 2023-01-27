@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing:border-box;
+    transition: .3s;
+}
+:root{
+    --alt-renk: #cacaca;
+    --ust-renk: #c0c0c0;
+}
+.home{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    color:black;
+    overflow: hidden;
+    font: 400 15px "Montserrat", sans-serif;
+    .cafeName{
+        color:crimson;
+        font-family: "Caveat", cursive;
+        background-color: var(--ust-renk);
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 8px;
+        font-size: 28px;
+        flex-grow: 0;
+        box-shadow: #aaaaaa 2px 2px 2px;
+        z-index: 1;
+    }
+    .categories{
+        display: flex;
+        width: 100%;
+        border-bottom: 2px dashed #aaaaaa;
+        background-color: var(--alt-renk);
+        padding: 4px;
+        overflow-x: auto;
+        flex-grow: 0;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        .category{
+            color: black;
+            background-color: var(--ust-renk);
+            border-radius: 8px;
+            padding: 6px 14px;
+            margin: 8px;
+            white-space: nowrap;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            &:active{
+                background-color: #aaaaaa;
+            }
+            box-shadow: #aaaaaa 2px 2px 2px;
+        }
+    }
+    .products{
+        width: 100%;
+        flex-grow: 1;
+        background-color: var(--alt-renk);
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        padding-bottom: 36px;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+        .grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            padding: 8px;
+            gap: 12px;
+            .product{
+                background-color:var(--ust-renk);
+                border-radius: 12px;
+                overflow: hidden;
+                position: relative;
+                .img{
+                    img{
+                        width: 100%;
+                    }
+                    .namePriceCont{
+                        font-size: 13px;
+                        position: absolute;
+                        background-color: #00000055;
+                        box-shadow: #000 1px 1px 2px;
+                        margin: 6px;
+                        border-radius: 4px;
+                        padding: 4px 8px;
+                        .name{
+                            color: #ffffff;
+                        }
+                        .price{
+                            color: #ffffffaa;
+                        }
+
+                    }
+                }
+                .descCont{
+                    display: flex;
+                    font-size: 13px;
+                    font-weight: 500;
+                    padding: 12px;
+                    color: #ffffff;
+                    background-color: #00000055;
+                    .amountContainer{
+                        display: flex;
+                        align-items: center;
+                        .minusAmountWrapper{
+                            display: flex;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .bottomNavBar{
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        .button{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: crimson;
+            color: var(--alt-renk);
+            box-shadow: #444 1px 1px 4px;
+            border-radius: 24px;
+            padding: 12px;
+            font-size: 16px;
+            width: 44%;
+        }
+    }
+}
