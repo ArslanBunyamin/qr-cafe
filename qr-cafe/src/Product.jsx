@@ -14,28 +14,26 @@ function Product(props) {
         <img src={props.img} />
       </div>
       <div className="descCont">
-        <div className="desc">
-          İçinizi ısıtacak sıcak mı sıcak, tatlı bir latte.
-        </div>
+        <div className="desc">{props.desc}</div>
         <div className="amountContainer">
+          <div
+            className="plus"
+            onClick={() => {
+              setAmount((amount) => amount + 1);
+            }}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </div>
           <div className="minusAmountWrapper">
+            <div className="amount">{amount}</div>
             <div
               className="minus"
-              onClick={(amount) => {
-                amount - 1;
+              onClick={() => {
+                setAmount((amount) => (amount == 0 ? amount : amount - 1));
               }}
             >
               <FontAwesomeIcon icon={faMinus} />
             </div>
-            <div className="amount">{amount}</div>
-          </div>
-          <div
-            className="plus"
-            onClick={(amount) => {
-              amount + 1;
-            }}
-          >
-            <FontAwesomeIcon icon={faPlus} />
           </div>
         </div>
       </div>

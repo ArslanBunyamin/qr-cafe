@@ -28,14 +28,44 @@ function Products() {
         </a>
       </div>
       <div className="grid" id="kahve">
-        <Product name="Latte" price="45" img={latte1} />
-        <Product name="Cappuccino" price="55" img={cappuccino} />
-        <Product name="Americano" price="32" img={americano} />
+        <Product
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          name="Latte"
+          price="45"
+          img={latte1}
+        />
+        <Product
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          name="Cappuccino"
+          price="55"
+          img={cappuccino}
+        />
+        <Product
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          name="Americano"
+          price="32"
+          img={americano}
+        />
       </div>
       <div className="grid" id="tatli">
-        <Product name="Latte" price="45" img={latte1} />
-        <Product name="Cappuccino" price="55" img={cappuccino} />
-        <Product name="Americano" price="32" img={americano} />
+        <Product
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          name="Latte"
+          price="45"
+          img={latte1}
+        />
+        <Product
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          name="Cappuccino"
+          price="55"
+          img={cappuccino}
+        />
+        <Product
+          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+          name="Americano"
+          price="32"
+          img={americano}
+        />
       </div>
       <div className="grid" id="cay"></div>
       <div className="grid" id="soguklar"></div>
