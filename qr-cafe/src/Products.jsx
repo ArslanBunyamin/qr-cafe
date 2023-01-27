@@ -6,7 +6,7 @@ import americano from "./images/americano.jpg";
 
 function Products() {
   return (
-    <div className="products">
+    <div className="mainn">
       <div className="categories">
         <a href="#kahve" className="category">
           Kahve
@@ -27,48 +27,50 @@ function Products() {
           Soğuk İçecek
         </a>
       </div>
-      <div className="grid" id="kahve">
-        <Product
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          name="Latte"
-          price="45"
-          img={latte1}
-        />
-        <Product
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          name="Cappuccino"
-          price="55"
-          img={cappuccino}
-        />
-        <Product
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          name="Americano"
-          price="32"
-          img={americano}
-        />
+      <div className="products">
+        <div className="grid" id="kahve">
+          <Product
+            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            name="Latte"
+            price="45"
+            img={latte1}
+          />
+          <Product
+            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            name="Cappuccino"
+            price="55"
+            img={cappuccino}
+          />
+          <Product
+            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            name="Americano"
+            price="32"
+            img={americano}
+          />
+        </div>
+        <div className="grid" id="tatli">
+          <Product
+            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            name="Latte"
+            price="45"
+            img={latte1}
+          />
+          <Product
+            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            name="Cappuccino"
+            price="55"
+            img={cappuccino}
+          />
+          <Product
+            desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            name="Americano"
+            price="32"
+            img={americano}
+          />
+        </div>
+        <div className="grid" id="cay"></div>
+        <div className="grid" id="soguklar"></div>
       </div>
-      <div className="grid" id="tatli">
-        <Product
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          name="Latte"
-          price="45"
-          img={latte1}
-        />
-        <Product
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          name="Cappuccino"
-          price="55"
-          img={cappuccino}
-        />
-        <Product
-          desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-          name="Americano"
-          price="32"
-          img={americano}
-        />
-      </div>
-      <div className="grid" id="cay"></div>
-      <div className="grid" id="soguklar"></div>
     </div>
   );
 }
