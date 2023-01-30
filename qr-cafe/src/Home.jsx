@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "./firebase.js";
 import "./home.scss";
@@ -7,7 +7,8 @@ import {
   faBasketShopping,
   faPersonRunning,
 } from "@fortawesome/free-solid-svg-icons";
-import Products from "./Products.jsx";
+import ProductsPage from "./ProductsPage.jsx";
+import Cart from "./Cart.jsx";
 
 function Home(props) {
   const addDocToFirestore = async (e) => {
@@ -18,10 +19,12 @@ function Home(props) {
     });
   };
 
+  const [showCart, setShowCart] = useState(false);
+
   return (
     <div className="home">
       <div className="cafeName">Kafe Marsyas</div>
-      <Products />
+      {showCart ? <Cart /> : <ProductsPage />}
       <div className="bottomNavBar">
         <div className="button">
           <FontAwesomeIcon
@@ -33,7 +36,13 @@ function Home(props) {
           />
           Garson çağır
         </div>
-        <div className="button">
+        <div
+          className="button"
+          onClick={(e) => {
+            e.preventDefault();
+            setShowCart((statement) => !statement);
+          }}
+        >
           <FontAwesomeIcon
             style={{ fontSize: "20px", marginRight: "8px" }}
             icon={faBasketShopping}

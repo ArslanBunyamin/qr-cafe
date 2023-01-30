@@ -1,20 +1,29 @@
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { React, useState } from "react";
+import { useSelector } from "react-redux";
 
 function Product(props) {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(props.amount);
+  const urunListesi = useSelector((state) => state.urunListesi);
+  const urun = urunListesi[props.productId];
+
   return (
     <div className="product">
       <div className="img">
         <div className="namePriceCont">
-          <div className="name">{props.name}</div>
-          <div className="price">{props.price}₺</div>
+          <div className="name">{urun.name}</div>
+          <div className="price">{urun.price}₺</div>
         </div>
-        <img src={props.img} />
+        <img src={urun.photo} />
       </div>
       <div className="descCont">
-        <div className="desc">{props.desc}</div>
+        <div className="desc">
+          {urun.desc}
+          {props.totalPrice ? (
+            <div className="totalPrice"> {props.totalPrice}₺</div>
+          ) : null}
+        </div>
         <div className="amountContainer">
           <div
             className="plus"
