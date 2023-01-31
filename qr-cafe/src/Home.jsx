@@ -4,6 +4,7 @@ import { db } from "./firebase.js";
 import "./home.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faAlignLeft,
   faBasketShopping,
   faPersonRunning,
 } from "@fortawesome/free-solid-svg-icons";
@@ -43,11 +44,18 @@ function Home(props) {
             setShowCart((statement) => !statement);
           }}
         >
-          <FontAwesomeIcon
-            style={{ fontSize: "20px", marginRight: "8px" }}
-            icon={faBasketShopping}
-          />
-          Sepete git
+          {showCart ? (
+            <FontAwesomeIcon
+              style={{ fontSize: "20px", marginRight: "8px" }}
+              icon={faAlignLeft}
+            />
+          ) : (
+            <FontAwesomeIcon
+              style={{ fontSize: "20px", marginRight: "8px" }}
+              icon={faBasketShopping}
+            />
+          )}
+          {showCart ? "Ana menü" : "Sepetim"}
         </div>
       </div>
     </div>

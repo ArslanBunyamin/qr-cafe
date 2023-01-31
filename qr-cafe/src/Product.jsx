@@ -1,12 +1,28 @@
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { React, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment } from "./reduxFiles/siparisSlice";
 
 function Product(props) {
-  const [amount, setAmount] = useState(props.amount);
   const urunListesi = useSelector((state) => state.urunListesi);
   const urun = urunListesi[props.productId];
+  const siparis = useSelector((state) => state.siparis);
+  const dispatch = useDispatch();
+
+  const added = () => {
+    return (
+      <div className="minusAmountWrapper">
+        <div className="amount">{siparis[props.productId]}</div>
+        <div
+          className="minus"
+          onClick={() => dispatch(decrement(props.productId))}
+        >
+          <FontAwesomeIcon icon={faMinus} />
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="product">
@@ -27,23 +43,11 @@ function Product(props) {
         <div className="amountContainer">
           <div
             className="plus"
-            onClick={() => {
-              setAmount((amount) => amount + 1);
-            }}
+            onClick={() => dispatch(increment(props.productId))}
           >
             <FontAwesomeIcon icon={faPlus} />
           </div>
-          <div className="minusAmountWrapper">
-            <div className="amount">{amount}</div>
-            <div
-              className="minus"
-              onClick={() => {
-                setAmount((amount) => (amount == 0 ? amount : amount - 1));
-              }}
-            >
-              <FontAwesomeIcon icon={faMinus} />
-            </div>
-          </div>
+          {siparis[props.productId] == 0 ? null : added()}
         </div>
       </div>
     </div>

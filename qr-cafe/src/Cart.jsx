@@ -12,10 +12,14 @@ function Cart() {
 
   return (
     <div className="cart">
+      <div className="header">Sepetim</div>
       <div className="orders">
         {siparisList.map((list, i) => {
           const id = list[0];
           const amount = list[1];
+          if (amount == 0) {
+            return;
+          }
           return (
             <Product
               productId={id}
