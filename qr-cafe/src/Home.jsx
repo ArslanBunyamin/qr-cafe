@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "./firebase.js";
 import "./home.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,22 +8,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ProductsPage from "./ProductsPage.jsx";
 import Cart from "./Cart.jsx";
+import { useSelector } from "react-redux";
 
 function Home(props) {
-  const addDocToFirestore = async (e) => {
-    e.preventDefault();
-    await setDoc(doc(db, "Masalar", "Masa-" + props.masaNo), {
-      siparis: "{çay:2}",
-      tarih: new Date().toLocaleString(),
-    });
-  };
+  const urunListesi = useSelector((state) => state.urunListesi);
+  const siparis = useSelector((state) => state.siparis);
+  let toplamTutar = 0;
+  for (let i in siparis) {
+    toplamTutar += siparis[i] * urunListesi[i].price;
+  }
 
   const [showCart, setShowCart] = useState(false);
 
   return (
     <div className="home">
       <div className="cafeName">Kafe Marsyas</div>
-      {showCart ? <Cart /> : <ProductsPage />}
+      {showCart ? <Cart masaNo={props.masaNo} /> : <ProductsPage />}
       <div className="bottomNavBar">
         <div className="button">
           <FontAwesomeIcon
@@ -55,7 +53,16 @@ function Home(props) {
               icon={faBasketShopping}
             />
           )}
-          {showCart ? "Ana menü" : "Sepetim"}
+          {showCart ? (
+            "Ana menü"
+          ) : (
+            <div className="cartCont">
+              <div>Sepetim</div>
+              {toplamTutar == 0 ? null : (
+                <div className="toplamTutar">{"\n" + toplamTutar}₺</div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

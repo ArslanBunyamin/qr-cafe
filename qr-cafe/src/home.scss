@@ -4,12 +4,11 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  transition: 0.3s;
 }
 
 :root {
-  --alt-renk: #fafafa;
-  --ust-renk: #f5f5f5;
+  --alt-renk: #fee;
+  --ust-renk: #ffdfdf;
 }
 
 .home {
@@ -22,6 +21,7 @@
   overflow: hidden;
   position: relative;
   font: 400 15px "Montserrat", sans-serif;
+
 
   .cafeName {
     color: var(--alt-renk);
@@ -43,6 +43,8 @@
     height: 100%;
     overflow: hidden;
     position: relative;
+    background-color: var(--alt-renk);
+
 
     .categories {
       display: flex;
@@ -60,6 +62,7 @@
         display: none;
       }
 
+
       .category {
         color: black;
         background-color: var(--ust-renk);
@@ -72,6 +75,7 @@
 
         &:active {
           box-shadow: inset #888 1px 1px 2px;
+          transform: translateY(2px);
         }
 
         box-shadow: #888 1px 1px 2px;
@@ -83,6 +87,10 @@
       overflow-y: scroll;
       scroll-behavior: smooth;
       padding: 64px 0;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       .grid {
         display: grid;
@@ -97,6 +105,7 @@
           position: relative;
           box-shadow: 1px 1px 12px #555;
           border: 1px solid #555;
+          background-color: var(--ust-renk);
 
           .img {
             img {
@@ -125,7 +134,8 @@
 
           .descCont {
             display: grid;
-            grid-template-columns: 3fr 1fr;
+            grid-template-columns: 2.5fr 1fr;
+            column-gap: 16px;
             font-size: 12px;
             font-weight: 500;
             padding: 16px 12px;
@@ -136,7 +146,6 @@
               display: flex;
               flex-direction: column;
               justify-content: center;
-              position: relative;
               border-radius: 12px;
               overflow: hidden;
               box-shadow: inset 2px 4px 2px #aaa;
@@ -144,8 +153,8 @@
               .plus {
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 padding: 8px;
-                border: none;
                 font-size: 16px;
 
                 &:active {
@@ -159,7 +168,7 @@
                 align-items: center;
 
                 .amount {
-                  font-size: 14px;
+                  font-size: 16px;
                   padding: 6px;
                   display: flex;
                   justify-content: center;
@@ -200,30 +209,84 @@
       color: var(--alt-renk);
       box-shadow: #444 1px 1px 4px;
       border-radius: 24px;
-      padding: 12px;
-      font-size: 16px;
+      padding: 12px 16px;
+      font-size: 1rem;
       width: 44%;
+    }
+
+    .cartCont {
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 }
 
 .cart {
   width: 100%;
+  height: 100%;
   background-color: var(--alt-renk);
 
   .header {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 8px;
     width: 100%;
-    border-bottom: 2px dashed #555;
+    box-shadow: 0px 2px 2px #aaa;
     text-align: center;
-    font-size: 17px;
     font-weight: 600;
     color: crimson;
-    padding: 12px;
+    background-color: var(--ust-renk);
+    z-index: 1;
+    backdrop-filter: blur(0);
+
+    .headerText {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .confirmCont {
+      display: flex;
+      justify-content: space-between;
+
+      .button {
+        display: flex;
+        border: 1px solid crimson;
+        border-radius: 4px;
+        padding: 12px;
+        font-size: 15px;
+
+        &:active {
+          background-color: crimson;
+          color: var(--ust-renk);
+        }
+      }
+
+      .confirmCart {
+        color: green;
+        border-color: green;
+
+        &:active {
+          background-color: green;
+          color: var(--ust-renk);
+        }
+      }
+    }
   }
 
   .orders {
-    overflow-y: scroll;
+    overflow-y: auto;
+    height: 100%;
     padding: 8px;
+    padding-bottom: 15rem;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
 
     .product {
       display: grid;
@@ -232,21 +295,23 @@
       border-radius: 8px;
       overflow: hidden;
       box-shadow: #000 1px 1px 8px;
-
+      box-sizing: content-box;
 
       .img {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
 
         img {
           width: 100%;
-          vertical-align: middle;
-
         }
 
         .namePriceCont {
           font-size: 13px;
           background-color: #000000cc;
           box-shadow: #000 1px 1px 4px;
-          padding: 4px 8px;
+          padding: 8px;
+          flex-grow: 1;
 
           .name {
             color: #ffffff;
@@ -260,7 +325,8 @@
 
       .descCont {
         display: grid;
-        grid-template-columns: 3fr 1fr;
+        grid-template-columns: 2.5fr 1fr;
+        column-gap: 16px;
         font-size: 12px;
         font-weight: 500;
         padding: 16px 12px;
