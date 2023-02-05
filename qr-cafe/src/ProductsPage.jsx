@@ -1,8 +1,5 @@
 import React from "react";
 import Product from "./Product";
-import latte from "./images/latte.jpg";
-import cappuccino from "./images/cappuccino.jpg";
-import americano from "./images/americano.jpg";
 import { useDispatch, useSelector } from "react-redux";
 
 function Products() {
@@ -10,7 +7,7 @@ function Products() {
   const dispatch = useDispatch();
 
   return (
-    <div className="mainn">
+    <div className="main">
       <div className="categories">
         <a href="#kahve" className="category">
           Kahve

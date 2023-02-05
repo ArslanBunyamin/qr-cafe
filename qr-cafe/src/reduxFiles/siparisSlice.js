@@ -15,12 +15,12 @@ export const siparisSlice = createSlice({
     decrement: (state, index) => {
       state[index.payload] -= state[index.payload] == 0 ? 0 : 1;
     },
-    // incrementByAmount: (state, action) => {
-    //   state.value += action.payload
-    // },
+    reset: (state, index) => {
+      state[index.payload] = 0;
+    },
   },
 });
 
-export const { increment, decrement } = siparisSlice.actions;
+export const { increment, decrement, reset } = siparisSlice.actions;
 
 export default siparisSlice.reducer;

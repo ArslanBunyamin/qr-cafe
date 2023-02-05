@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home";
+import TableLogin from "./TableLogin";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home masaNo="0" />,
+      element: <TableLogin />,
     },
     {
       path: "/masa1",

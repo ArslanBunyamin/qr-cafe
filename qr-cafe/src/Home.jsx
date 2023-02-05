@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,8 +9,20 @@ import {
 import ProductsPage from "./ProductsPage.jsx";
 import Cart from "./Cart.jsx";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { db } from "./firebase.js";
+import { getDoc, doc } from "firebase/firestore";
 
 function Home(props) {
+  const checkPassword = async () => {
+    const navigate = useNavigate();
+    const currentUser = useSelector((state) => state.currentUser);
+    const masa = await getDoc(doc(db, "Masalar", "masa" + props.masaNo));
+    const sifre = masa.data().sifre;
+    if (currentUser.sifre != sifre) navigate("/");
+  };
+  checkPassword();
+
   const urunListesi = useSelector((state) => state.urunListesi);
   const siparis = useSelector((state) => state.siparis);
   let toplamTutar = 0;
@@ -22,7 +34,7 @@ function Home(props) {
 
   return (
     <div className="home">
-      <div className="cafeName">Kafe Marsyas</div>
+      <div className="cafeName">Kafe Wowoo</div>
       {showCart ? <Cart masaNo={props.masaNo} /> : <ProductsPage />}
       <div className="bottomNavBar">
         <div className="button">
