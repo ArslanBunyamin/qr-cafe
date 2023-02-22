@@ -20,6 +20,18 @@ function App() {
       path: "/masa3",
       element: <Home masaNo="3" />,
     },
+    {
+      path: "/masa4",
+      element: <Home masaNo="4" />,
+    },
+    {
+      path: "/masa5",
+      element: <Home masaNo="5" />,
+    },
+    {
+      path: "/masa6",
+      element: <Home masaNo="6" />,
+    },
   ]);
 
   return (

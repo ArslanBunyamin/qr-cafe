@@ -19,8 +19,8 @@
 
 @media(prefers-color-scheme:dark) {
   :root {
-    --alt-renk: #101010;
-    --ust-renk: #1a1a1a;
+    --alt-renk: #1a1a1a;
+    --ust-renk: #232323;
     --yazi-renk: #ddd;
     --golge-renk: #000;
     --saydam-renk: #3334;
@@ -47,12 +47,6 @@
   display: flex;
   flex-direction: column;
   font: 400 1rem "Montserrat", sans-serif;
-
-  .cafeName {
-    color: #000;
-    box-shadow: #000 0 2px 2px;
-
-  }
 
   .main {
     width: 100%;
@@ -185,6 +179,7 @@
       height: 100%;
       overflow-y: scroll;
       scroll-behavior: smooth;
+      scroll-padding: 340px;
       padding: 64px 0;
 
       &::-webkit-scrollbar {
@@ -407,7 +402,7 @@
 
         .namePriceCont {
           font-size: 13px;
-          background-color: #222;
+          background-color: #141414;
           box-shadow: #000 1px 1px 4px;
           padding: 8px;
           flex-grow: 1;

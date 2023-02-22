@@ -14,32 +14,6 @@ function TableLogin() {
   const navigate = useNavigate();
   let digitIndex = 0;
 
-  const checkPassword = async (currentPassword) => {
-    const masalar = query(
-      collection(db, "Masalar"),
-      where("sifre", "==", currentPassword)
-    );
-    const masalarSnapshot = await getDocs(masalar);
-
-    //if password is invalid
-    if (masalarSnapshot.empty) {
-      const digitElements = document.querySelectorAll(".digit");
-      digitElements.forEach((el) => {
-        el.textContent = 0;
-      });
-      digitIndex = 0;
-      const screen = document.querySelector(".screen");
-      screen.classList.add("invalidPassword");
-      return false;
-    }
-    //if it is valid
-    dispatch(setPassword(currentPassword));
-    masalarSnapshot.forEach((doc) => {
-      navigate(doc.id);
-    });
-    return true;
-  };
-
   useEffect(() => {
     const digitElements = document.querySelectorAll(".digit");
     let passwordText = "";
@@ -50,6 +24,10 @@ function TableLogin() {
         if (button.currentTarget.classList[1] == "delete") {
           if (digitIndex > 0) {
             digitIndex--;
+            digitElements.forEach((el) => {
+              el.style.borderBottom = "1px solid crimson";
+            });
+            digitElements[digitIndex].style.borderBottom = "2px solid crimson";
             digitElements[digitIndex].textContent = "0";
           }
           return;
@@ -58,13 +36,25 @@ function TableLogin() {
         digitElements[digitIndex].textContent =
           button.currentTarget.textContent;
         digitIndex++;
+        digitElements.forEach((el) => {
+          el.style.borderBottom = "1px solid crimson";
+        });
+        if (digitIndex != 4) {
+          digitElements[digitIndex].style.borderBottom = "2px solid crimson";
+        }
         //check if password is valid.
         if (digitIndex == 4) {
           digitElements.forEach((el) => {
             passwordText += el.textContent;
           });
-          const isValid = await checkPassword(passwordText);
-          if (!isValid) {
+          const masalar = query(
+            collection(db, "Masalar"),
+            where("sifre", "==", passwordText)
+          );
+          const masalarSnapshot = await getDocs(masalar);
+
+          //if password is invalid
+          if (masalarSnapshot.empty) {
             const screen = document.querySelector(".screen");
             screen.animate(
               [
@@ -76,7 +66,21 @@ function TableLogin() {
               { duration: 300, iterations: 1 }
             );
             passwordText = "";
+            const digitElements = document.querySelectorAll(".digit");
+            digitElements.forEach((el) => {
+              el.textContent = 0;
+            });
+            digitIndex = 0;
+            digitElements.forEach((el) => {
+              el.style.borderBottom = "1px solid crimson";
+            });
+            digitElements[digitIndex].style.borderBottom = "2px solid crimson";
           }
+          //if it is valid
+          dispatch(setPassword(passwordText));
+          masalarSnapshot.forEach((doc) => {
+            navigate(doc.id);
+          });
         }
       });
     });
@@ -90,7 +94,12 @@ function TableLogin() {
         <div className="card">
           <div className="header">Masa şifresi</div>
           <div className="screen">
-            <div className="digit">0</div>
+            <div
+              className="digit"
+              style={{ borderBottom: "2px solid crimson" }}
+            >
+              0
+            </div>
             <div className="digit">0</div>
             <div className="digit">0</div>
             <div className="digit">0</div>

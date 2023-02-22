@@ -1,13 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faWorm, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "./firebase.js";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "./Product";
 import { reset } from "./reduxFiles/siparisSlice.js";
+import { useNavigate } from "react-router-dom";
 
 function Cart(props) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const siparis = useSelector((state) => state.siparis);
   const urunListesi = useSelector((state) => state.urunListesi);
@@ -20,8 +22,12 @@ function Cart(props) {
     siparisList.push([id, siparis[id]]);
   }
 
-  const siparisiOnayla = async (e) => {
-    e.preventDefault();
+  const siparisiOnayla = async () => {
+    const confirmed = document.querySelector(".confirmed");
+    const confirmCart = document.querySelector(".confirmCart");
+    confirmed.textContent = "Sipariş onaylandı";
+    confirmCart.style.background = "green";
+    confirmCart.style.color = "#ddd";
     await updateDoc(doc(db, "Masalar", "masa" + props.masaNo), {
       siparisFisi: {
         siparis: siparis,
@@ -29,9 +35,12 @@ function Cart(props) {
         toplamTutar: toplamTutar,
       },
     });
+    setTimeout(() => {
+      navigate("/");
+      sepetiTemizle();
+    }, 200);
   };
-  const sepetiTemizle = (e) => {
-    e.preventDefault();
+  const sepetiTemizle = () => {
     for (let id in siparis) {
       dispatch(reset(id));
     }
@@ -44,7 +53,7 @@ function Cart(props) {
           <div className="headerText">{"Sepet Tutarı: " + toplamTutar}₺</div>
         )}
         {toplamTutar == 0 ? (
-          <div>Sepet Boş</div>
+          <div style={{ padding: "8px 0", fontSize: "1rem" }}>Sepet Boş</div>
         ) : (
           <div className="confirmCont">
             <div className="button clearCart" onClick={sepetiTemizle}>
@@ -65,7 +74,7 @@ function Cart(props) {
                 }}
                 icon={faCheck}
               />
-              Siparişi onayla
+              <div className="confirmed">siparişi onayla</div>
             </div>
           </div>
         )}
@@ -86,6 +95,25 @@ function Cart(props) {
             />
           );
         })}
+        {toplamTutar == 0 ? (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faWorm}
+              style={{
+                width: "100%",
+                fontSize: "3rem",
+                color: "crimson",
+              }}
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );
